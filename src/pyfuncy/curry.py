@@ -22,7 +22,7 @@ def _get_num_args(fn):
     if not isinstance(fn, partial):
         return 0
 
-    return len(fn.args) + _get_num_args(fn.func)
+    return len(fn.args)
 
 
 def _get_num_fn_params(fn):
@@ -30,7 +30,7 @@ def _get_num_fn_params(fn):
     Get the number of parameters required by the given function
     """
     if isinstance(fn, partial):
-        return _get_num_fn_params(fn.func)
+        return len(signature(fn.func).parameters)
 
     return len(signature(fn).parameters)
 
